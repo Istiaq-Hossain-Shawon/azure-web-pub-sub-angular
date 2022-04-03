@@ -14,7 +14,7 @@ export class NotificationService {
     WebSocketFactory.getSocket("azure").publishStatus(data);
   }
   
-  public  Connection() :Observable<any>{
+  public  connection() :Observable<any>{
     return WebSocketFactory.getSocket("azure").getStatus();
   }
 }
