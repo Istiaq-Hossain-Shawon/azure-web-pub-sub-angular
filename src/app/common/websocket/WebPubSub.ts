@@ -10,7 +10,7 @@ export class WebPubSub implements IWebSocket {
   getStatus(): Observable<any> {
 
     var observable = new Observable<any>((subcriber) => {
-      this.GetURl().then(value => {
+      this.GetClientAccessUrl().then(value => {
         var subject = webSocket(value)
         subject.subscribe(
           msg => subcriber.next(msg),
@@ -28,7 +28,7 @@ export class WebPubSub implements IWebSocket {
     const serviceClient = new WebPubSubServiceClient(WebPubSubConstants.connectionStringAzureWebPubSub, WebPubSubConstants.hubAzureWebPubSub);
     await serviceClient.sendToAll(information);
   }
-  private async GetURl(): Promise<string> {
+  private async GetClientAccessUrl(): Promise<string> {
     const service = new WebPubSubServiceClient(WebPubSubConstants.connectionStringAzureWebPubSub, WebPubSubConstants.hubAzureWebPubSub);
     let token = await service.getClientAccessToken();
     return token.url;
